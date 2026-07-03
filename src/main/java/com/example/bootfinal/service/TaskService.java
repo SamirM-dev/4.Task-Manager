@@ -1,6 +1,7 @@
 package com.example.bootfinal.service;
 
 import com.example.bootfinal.dtorequest.CreateTaskRequest;
+import com.example.bootfinal.dtorequest.UpdateTaskRequest;
 import com.example.bootfinal.entity.Task;
 import com.example.bootfinal.enums.TaskStatus;
 import com.example.bootfinal.repository.TaskRepository;
@@ -29,27 +30,41 @@ public class TaskService {
 
     public Task findById(Long id){
         if(id==null || id<0) {
-            throw new IllegalArgumentException("Некорреткно введённый айди!");
+            throw new IllegalArgumentException("Некорректно введённый id!");
         }
         Optional<Task> optionalTask = taskRepository.findById(id);
         if (optionalTask.isEmpty()){
-            throw new EntityNotFoundException("Задачи с таким айди нет!");
+            throw new EntityNotFoundException("Задачи с таким id нет!");
         }
         return optionalTask.get();
     }
 
     public void deleteById(Long id){
         if(id==null || id<0) {
-            throw new IllegalArgumentException("Некорреткно введённый айди!");
+            throw new IllegalArgumentException("Некорректно введённый id!");
         }
         Optional<Task> optionalTask = taskRepository.findById(id);
         if (optionalTask.isEmpty()){
-            throw new EntityNotFoundException("Задачи с таким айди нет!");
+            throw new EntityNotFoundException("Задачи с таким id нет!");
         }
         taskRepository.deleteById(id);
     }
 
-    public void updateTask(){}
+    public Task updateTask(Long id,UpdateTaskRequest request){
+        if(id==null || id<0) {
+            throw new IllegalArgumentException("Некорректно введённый id!");
+        }
+        Optional<Task> optionalTask = taskRepository.findById(id);
+        if (optionalTask.isEmpty()){
+            throw new EntityNotFoundException("Задачи с таким id нет!");
+        }
+        Task updated = optionalTask.get();
+        updated.setTitle(request.getTitle());
+        updated.setDescription(request.getDescription());
+        updated.setTaskStatus(request.getStatus());
+        return taskRepository.save(updated);
+
+    }
 
     public Task createTask(CreateTaskRequest request){
         Task newTask = new Task(request.getTitle(), request.getDescription());

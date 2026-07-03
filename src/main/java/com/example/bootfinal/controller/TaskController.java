@@ -1,6 +1,7 @@
 package com.example.bootfinal.controller;
 
 import com.example.bootfinal.dtorequest.CreateTaskRequest;
+import com.example.bootfinal.dtorequest.UpdateTaskRequest;
 import com.example.bootfinal.entity.Task;
 import com.example.bootfinal.service.TaskService;
 import io.micrometer.core.ipc.http.HttpSender;
@@ -38,10 +39,15 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Task> update(@PathVariable Long id){
-
+    public ResponseEntity<Task> update(@PathVariable Long id, @Valid @RequestBody UpdateTaskRequest  request){
+        Task updated=taskService.updateTask(id,request);
+        return ResponseEntity.ok(updated);
     }
 
-    public delete(){}
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        taskService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }
