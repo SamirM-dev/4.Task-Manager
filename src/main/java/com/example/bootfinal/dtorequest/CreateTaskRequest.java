@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.Getter;
 
-@Getter
+@Data
 public class CreateTaskRequest {
 
     @NotBlank(message = "Необходимо заполнить имя!")
@@ -14,9 +14,4 @@ public class CreateTaskRequest {
     @Size(max=500,message = "Описание не должно превышать 500 символов!")
     private String description;
 
-    public CreateTaskRequest(String title, String description) {
-        this.title = title;
-        this.description = description;
-    }
-    public   CreateTaskRequest() {}
 }

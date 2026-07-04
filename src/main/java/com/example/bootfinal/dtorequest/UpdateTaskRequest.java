@@ -3,9 +3,10 @@ package com.example.bootfinal.dtorequest;
 import com.example.bootfinal.enums.TaskStatus;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+
+@Data
 public class UpdateTaskRequest {
 
     @NotBlank(message = "Необходимо заполнить имя!")

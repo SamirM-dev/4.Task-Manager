@@ -23,7 +23,7 @@ public class Task {
     public Task(String title, String description) {
         this.title = title;
         this.description = description;
-        this.taskStatus=TaskStatus.NEW;
+        this.status=TaskStatus.NEW;
         this.createdAt=LocalDateTime.now();
     }
 
@@ -36,6 +36,6 @@ public class Task {
     }
 
     public void setTaskStatus(TaskStatus taskStatus) {
-        this.taskStatus = taskStatus;
+        this.status = taskStatus;
     }
 }
