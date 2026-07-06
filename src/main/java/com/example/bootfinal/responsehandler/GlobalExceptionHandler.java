@@ -24,6 +24,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleMethodArgumentNotValid(MethodArgumentNotValidException e, HttpServletRequest request) {
         ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST.value(),"BAD REQUEST",e.getMessage(),request.getRequestURI());
         List<ErrorResponse.FieldError> fieldErrors = e.getBindingResult().getFieldErrors().stream().map(fieldError -> new ErrorResponse.FieldError(fieldError.getField(), fieldError.getDefaultMessage())).collect(Collectors.toList());
+        error.setFieldErrors(fieldErrors);
         return ResponseEntity.badRequest().body(error);
     }
     @ExceptionHandler(IllegalArgumentException.class)
