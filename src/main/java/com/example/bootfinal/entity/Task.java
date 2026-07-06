@@ -14,6 +14,7 @@ public class Task {
     private Long id;
     private String title;
     private String description;
+    @Enumerated(EnumType.STRING)
     private TaskStatus status;
     @Column(name = "created_at")
     private LocalDateTime createdAt;

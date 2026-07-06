@@ -8,9 +8,11 @@ import lombok.Data;
 
 @Data
 public class UpdateTaskRequest {
-
+    @NotBlank(message = "Необходимо заполнить имя!")
     private String title;
+    @Size(max=500,message = "Описание не должно превышать 500 символов!")
     private String description;
+    @NotBlank(message = "Необходимо заполнить статус!")
     private TaskStatus status;
 
 }

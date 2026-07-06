@@ -9,17 +9,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyCmdLineRunner implements CommandLineRunner {
     private final TaskService taskService;
-    private final Environment environment;
-    CreateTaskRequest createTaskRequest = new CreateTaskRequest();
 
-    public MyCmdLineRunner(TaskService taskService, Environment environment) {
+    public MyCmdLineRunner(TaskService taskService) {
         this.taskService = taskService;
-        this.environment = environment;
     }
 
     @Override
     public void run(String... args) throws Exception {
         for (int i = 1; i <4; i++) {
+            CreateTaskRequest createTaskRequest = new CreateTaskRequest();
             createTaskRequest.setTitle("Task #"+i);
             createTaskRequest.setDescription("Description for Task #"+i);
             taskService.createTask(createTaskRequest);
